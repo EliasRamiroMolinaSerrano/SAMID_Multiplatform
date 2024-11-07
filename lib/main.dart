@@ -1,125 +1,231 @@
 import 'package:flutter/material.dart';
+import 'screens/registration_page.dart';  // Asegúrate de importar la página de registro
+import 'constants/colors.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MainScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
+class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
+      backgroundColor: Colors.white,
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Logo SAMID
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'SAM',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 50,
+                      color: Color(0xFF47C5C2), // Color verdoso
+                    ),
+                  ),
+                  Text(
+                    'ID',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 50,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 5),
+
+              // "Sign in to your account" text with marginBottom
+              Text(
+                "Inicia sesión en tu cuenta",
+                style: TextStyle(fontFamily: 'montserrat_regular', fontSize: 12),
+              ),
+              SizedBox(height: 50), // Margin between the text and the input fields
+
+              // Username input
+              Container(
+                decoration: BoxDecoration(
+                  color: AppColors.primaryLight, // Fondo con color Primary_Light
+                  borderRadius: BorderRadius.circular(20), // Más redondeado
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 2,
+                      blurRadius: 6,
+                      offset: Offset(0, 3), // Sombra hacia abajo
+                    ),
+                  ],
+                ),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: 'Email',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    filled: true,
+                    fillColor: AppColors.primaryLight, // Fondo del campo
+                    border: InputBorder.none, // Elimina el borde por defecto
+                    contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  ),
+                ),
+              ),
+              SizedBox(height: 16), // Separación entre los campos de texto
+
+              // Password input
+              Container(
+                decoration: BoxDecoration(
+                  color: AppColors.primaryLight, // Fondo con color Primary_Light
+                  borderRadius: BorderRadius.circular(20), // Más redondeado
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 2,
+                      blurRadius: 6,
+                      offset: Offset(0, 3), // Sombra hacia abajo
+                    ),
+                  ],
+                ),
+                child: TextFormField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: 'Password',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    filled: true,
+                    fillColor: AppColors.primaryLight, // Fondo del campo
+                    border: InputBorder.none, // Elimina el borde por defecto
+                    contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  ),
+                ),
+              ),
+
+              // "Forgot Password?" text
+              SizedBox(height: 16),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  "Olvidaste tu contraseña?",
+                  style: TextStyle(fontFamily: 'Montserrat', fontSize: 14),
+                ),
+              ),
+
+              // Login button
+              SizedBox(height: 40),
+              ElevatedButton(
+                onPressed: () {
+                  // Navegar a la página de registro
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => RegistrationPage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(200, 60),
+                  backgroundColor: AppColors.verdoso, // Replace with your color
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+                child: Text(
+                  "Iniciar sesión",
+                  style: TextStyle(fontSize: 18, color: Colors.white, fontFamily: "montserrat_bold"),
+                ),
+              ),
+
+              // Horizontal lines and "Sign up with" text
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Row(
+                  children: [
+                    Expanded(child: Divider(thickness: 2)),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Text("Inicia sesión con"),
+                    ),
+                    Expanded(child: Divider(thickness: 2)),
+                  ],
+                ),
+              ),
+
+              // Social login buttons (Fixed width)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Facebook Button
+                  SizedBox(
+                    width: 150, // Cambia el ancho de este botón (Facebook)
+                    child: socialButton('facebook_logo.png', 'Facebook'),
+                  ),
+                  SizedBox(width: 10), // Espacio entre los botones
+                  // Google Button
+                  SizedBox(
+                    width: 150, // Cambia el ancho de este botón (Google)
+                    child: socialButton('google_logo.png', 'Google'),
+                  ),
+                ],
+              ),
+
+              // "Don't have an account?" and "Sign up" texts
+              SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("No tienes una cuenta?"),
+                  TextButton(
+                    onPressed: () {
+                      // Handle registration navigation
+                    },
+                    child: Text(
+                      "Regístrate",
+                      style: TextStyle(color: AppColors.verdoso),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  Widget socialButton(String imagePath, String text) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 2,
+            blurRadius: 6,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center, // Centra el contenido dentro del botón
+        children: [
+          Image.asset(
+            'assets/images/$imagePath', // Corrected asset path
+            width: 24,
+            height: 24,
+          ),
+          SizedBox(width: 8),
+          Text(text, style: TextStyle(fontFamily: 'Montserrat')),
+        ],
+      ),
     );
   }
 }
