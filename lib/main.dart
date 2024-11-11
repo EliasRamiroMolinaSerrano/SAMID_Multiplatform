@@ -1,8 +1,14 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'screens/registration_page.dart';  // Asegúrate de importar la página de registro
 import 'constants/colors.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(
+  DevicePreview(
+    builder: (context) => MyApp(),
+  ),
+);
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -183,6 +189,10 @@ class MainScreen extends StatelessWidget {
                   Text("No tienes una cuenta?"),
                   TextButton(
                     onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => RegistrationPage()),
+                      );
                       // Handle registration navigation
                     },
                     child: Text(

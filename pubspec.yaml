@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
   web_socket_channel: ^2.1.0
+  device_preview: 1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -23,6 +24,8 @@ flutter:
   assets:
     - assets/images/facebook_logo.png
     - assets/images/google_logo.png
+    - assets/images/usuarios.png
+    - assets/images/chart.png
   fonts:
     - family: Montserrat
       fonts:

@@ -28,4 +28,5 @@ class AppColors {
   static const Color moradoFuerte = Color(0xFF7D66D8);
   static const Color lightGray = Color(0xFFB0B0B0);
   static const Color red = Color(0xFFFB3C3C);
+  static const Color card = Color(0x00b0ebea);
 }

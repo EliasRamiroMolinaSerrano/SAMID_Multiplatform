@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:samid_multiplatform/constants/colors.dart';
+import 'package:samid_multiplatform/screens/HomeActivity.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -35,8 +36,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              SizedBox(height: 100), // Logo SAMID más abajo
-              // Logo SAMID
+              SizedBox(height: 100),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -45,7 +45,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontSize: 50,
-                      color: Color(0xFF47C5C2), // Color verdoso
+                      color: Color(0xFF47C5C2),
                     ),
                   ),
                   Text(
@@ -69,7 +69,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ),
               ),
               SizedBox(height: 50),
-              // Input fields con el mismo estilo que MainScreen
               _buildTextField(hintText: 'Nombre'),
               SizedBox(height: 16),
               _buildTextField(hintText: 'Apellido'),
@@ -78,10 +77,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
               SizedBox(height: 16),
               _buildTextField(hintText: 'Contraseña', obscureText: true),
               SizedBox(height: 24),
-              // Botón de registrar
               ElevatedButton(
                 onPressed: () {
-                  print('Formulario enviado!');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeActivity()),
+                  );
                 },
                 child: Text(
                   'Registrar',
@@ -93,7 +94,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.verdoso, // Color verdoso
+                  backgroundColor: AppColors.verdoso,
                   padding: EdgeInsets.symmetric(horizontal: 60, vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
@@ -101,7 +102,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ),
               ),
               SizedBox(height: 24),
-              // Texto para usuarios existentes
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -122,18 +122,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
   }
 
-  // Widget para crear los campos de texto con el estilo de MainScreen
   Widget _buildTextField({required String hintText, bool obscureText = false}) {
     return Container(
       decoration: BoxDecoration(
-        color: Color(0xFFE3F2F1), // Fondo con el color Primary_Light
-        borderRadius: BorderRadius.circular(20), // Bordes redondeados
+        color: Color(0xFFE3F2F1),
+        borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.3),
             spreadRadius: 2,
             blurRadius: 6,
-            offset: Offset(0, 3), // Sombra hacia abajo
+            offset: Offset(0, 3),
           ),
         ],
       ),
@@ -143,8 +142,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
           hintText: hintText,
           hintStyle: TextStyle(color: Colors.grey),
           filled: true,
-          fillColor: AppColors.primaryLight, // Color de fondo del campo
-          border: InputBorder.none, // Elimina el borde por defecto
+          fillColor: AppColors.primaryLight,
+          border: InputBorder.none,
           contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         ),
       ),
