@@ -1,96 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:samid_multiplatform/constants/colors.dart';
+import 'package:samid_multiplatform/screens/menu.dart'; // Asegúrate de importar el menú
 
 class PatientsView extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  // Función para abrir el Drawer
+  void _openDrawer(BuildContext context) {
+    _scaffoldKey.currentState?.openDrawer();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Column(
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.menu, size: 30, color: Colors.white),
-                    onPressed: () {
-                      Navigator.of(context).pop(); // Cerrar el Drawer
-                    },
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Menu',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
-              onTap: () {
-                Navigator.pushReplacementNamed(context, '/home');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.people),
-              title: Text('Patients'),
-              onTap: () {
-                Navigator.pushReplacementNamed(context, '/patients_view');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.analytics),
-              title: Text('Weekly Analysis'),
-              onTap: () {
-                Navigator.pushReplacementNamed(context, '/weekly_analysis');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.check),
-              title: Text('Check Now'),
-              onTap: () {
-                Navigator.pushReplacementNamed(context, '/check_now');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.history),
-              title: Text('Health and Activity History'),
-              onTap: () {
-                Navigator.pushReplacementNamed(context, '/history');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.devices),
-              title: Text('Device Status'),
-              onTap: () {
-                Navigator.pushReplacementNamed(context, '/device_status');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.logout),
-              title: Text('Logout'),
-              onTap: () {
-                // Handle logout logic
-              },
-            ),
-          ],
-        ),
-      ),
+      key: _scaffoldKey, // Usamos la clave del Scaffold
+      drawer: CustomDrawer(navigateTo: (route) => Navigator.pushReplacementNamed(context, route)), // Usamos el Drawer
       appBar: AppBar(
-        title: Text('Patients'),
         leading: IconButton(
           icon: Icon(Icons.menu),
-          onPressed: () {
-            Scaffold.of(context).openDrawer();
-          },
+          onPressed: () => _openDrawer(context), // Función para abrir el menú
         ),
+        title: Text('Pacientes'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -119,13 +49,13 @@ class PatientsView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          'assets/images/pulsera.png',
+                          'images/pulsera.png',
                           width: 90,
                           height: 90,
                         ),
                         SizedBox(height: 8),
                         Image.asset(
-                          'assets/images/battery_svg.png',
+                          'images/battery_low.png',
                           width: 40,
                           height: 40,
                           color: Colors.red,
@@ -187,6 +117,7 @@ class PatientsView extends StatelessWidget {
                 ),
               ),
             ),
+            Spacer(),
             Positioned(
               bottom: 50,
               right: 20,

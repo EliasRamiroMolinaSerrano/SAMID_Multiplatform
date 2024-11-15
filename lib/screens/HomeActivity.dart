@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:samid_multiplatform/constants/colors.dart';
 import 'package:samid_multiplatform/screens/PatientsView.dart';
+import 'package:samid_multiplatform/screens/ActivityDeviceStats.dart';
+import 'package:samid_multiplatform/screens/menu.dart'; // Importamos el menú desde el archivo 'menu.dart'
 
 class HomeActivity extends StatefulWidget {
   @override
@@ -22,116 +24,7 @@ class _HomeActivityState extends State<HomeActivity> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    radius: 40,
-                    backgroundImage: AssetImage('assets/images/your_image.png'), // Ruta de la imagen
-                  ),
-                  SizedBox(width: 10), // Espacio entre la imagen y el nombre
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center, // Alinea el nombre verticalmente
-                    children: [
-                      Text(
-                        'Samuel', // Nombre que aparecerá a la derecha de la imagen
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontFamily: 'Montserrat',
-                        ),
-                      ),
-                      // Si necesitas un subtítulo debajo del nombre, agrégalo aquí
-                      Text(
-                        'Bienvenido',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white70,
-                          fontFamily: 'Montserrat',
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            ListTile(
-              leading: Icon(Icons.home), // Replace with your custom icon
-              title: Text(
-                'Inicio',
-                style: TextStyle(fontFamily: 'Montserrat'),
-              ),
-              onTap: () => _navigateTo('/home'),
-            ),
-            ListTile(
-              leading: Icon(Icons.people),
-              title: Text(
-                'Pacientes',
-                style: TextStyle(fontFamily: 'Montserrat'),
-              ),
-              onTap: () {
-                // Navegar a PatientsView
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => PatientsView(), // Asegúrate de que esta sea la vista correcta
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.calendar_today), // Replace with your custom icon
-              title: Text(
-                'Análisis semanal',
-                style: TextStyle(fontFamily: 'Montserrat'),
-              ),
-              onTap: () => _navigateTo('/weekly_analysis'),
-            ),
-            ListTile(
-              leading: Icon(Icons.healing), // Replace with your custom icon
-              title: Text(
-                'Checar ahora',
-                style: TextStyle(fontFamily: 'Montserrat'),
-              ),
-              onTap: () => _navigateTo('/check_now'),
-            ),
-            ListTile(
-              leading: Icon(Icons.history), // Replace with your custom icon
-              title: Text(
-                'Historial de salud y actividad',
-                style: TextStyle(fontFamily: 'Montserrat'),
-              ),
-              onTap: () => _navigateTo('/history'),
-            ),
-            ListTile(
-              leading: Icon(Icons.devices), // Replace with your custom icon
-              title: Text(
-                'Estado del dispositivo',
-                style: TextStyle(fontFamily: 'Montserrat'),
-              ),
-              onTap: () => _navigateTo('/device_status'),
-            ),
-            Divider(), // Divider for logout section
-            ListTile(
-              leading: Icon(Icons.exit_to_app), // Replace with your custom icon
-              title: Text(
-                'Salir de la cuenta',
-                style: TextStyle(fontFamily: 'Montserrat'),
-              ),
-              onTap: () => _navigateTo('/logout'),
-            ),
-          ],
-        ),
-      ),
+      drawer: CustomDrawer(navigateTo: _navigateTo), // Usamos el CustomDrawer aquí
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.menu),
@@ -150,7 +43,7 @@ class _HomeActivityState extends State<HomeActivity> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat', // Aplica Montserrat
+                    fontFamily: 'Montserrat',
                   ),
                 ),
                 Text(
@@ -159,7 +52,7 @@ class _HomeActivityState extends State<HomeActivity> {
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: AppColors.verdoso,
-                    fontFamily: 'Montserrat', // Aplica Montserrat
+                    fontFamily: 'Montserrat',
                   ),
                 ),
               ],
@@ -170,7 +63,7 @@ class _HomeActivityState extends State<HomeActivity> {
               elevation: 7,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
               child: Container(
-                height: 150, // Ajusta la altura de la tarjeta
+                height: 150,
                 child: Row(
                   children: [
                     Align(
@@ -179,36 +72,36 @@ class _HomeActivityState extends State<HomeActivity> {
                         Icons.group,
                         size: 100,
                         color: AppColors.verdoso,
-                      ), // Icono grande
+                      ),
                     ),
                     SizedBox(
-                      width: 220, // Ancho fijo del contenedor
+                      width: 220,
                       child: Container(
-                        height: 35, // Ajusta la altura del contenedor
-                        margin: EdgeInsets.only(bottom: 10), // Agrega margen inferior
+                        height: 35,
+                        margin: EdgeInsets.only(bottom: 10),
                         padding: EdgeInsets.symmetric(vertical: 1.1),
                         decoration: BoxDecoration(
                           color: AppColors.primaryNormal,
-                          borderRadius: BorderRadius.circular(15.0), // Radio del borde
+                          borderRadius: BorderRadius.circular(15.0),
                           boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 5)],
                         ),
                         child: Align(
                           alignment: Alignment.center,
                           child: ListTile(
                             title: Transform.translate(
-                              offset: Offset(0, -6), // Mueve el texto hacia arriba
+                              offset: Offset(0, -6),
                               child: Text(
                                 'Consultar Pacientes',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.normal,
                                   fontSize: 13,
-                                  fontFamily: 'Montserrat', // Aplica Montserrat
+                                  fontFamily: 'Montserrat',
                                 ),
                               ),
                             ),
                             trailing: Transform.translate(
-                              offset: Offset(0, -6), // Mueve la flecha hacia arriba
+                              offset: Offset(0, -6),
                               child: Icon(
                                 Icons.arrow_forward,
                                 color: Colors.white,
@@ -228,15 +121,15 @@ class _HomeActivityState extends State<HomeActivity> {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                fontFamily: 'Montserrat', // Aplica Montserrat
+                fontFamily: 'Montserrat',
               ),
             ),
             SizedBox(height: 10),
             Row(
               children: [
                 Container(
-                  width: 160, // Ancho fijo del contenedor
-                  height: 150, // Altura fija del contenedor
+                  width: 160,
+                  height: 150,
                   child: Card(
                     color: Color(0xFFD3E2FB),
                     elevation: 7,
@@ -246,14 +139,14 @@ class _HomeActivityState extends State<HomeActivity> {
                       child: Stack(
                         children: [
                           Positioned(
-                            top: 1, // Ajusta la posición vertical
-                            left: 1, // Ajusta la posición horizontal
+                            top: 1,
+                            left: 1,
                             child: Text(
                               'Analisis semanal',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal,
-                                fontFamily: 'montserrat_semi_bold', // Aplica Montserrat
+                                fontFamily: 'montserrat_semi_bold',
                               ),
                             ),
                           ),
@@ -273,27 +166,26 @@ class _HomeActivityState extends State<HomeActivity> {
                 SizedBox(width: 10),
                 Expanded(
                   child: Card(
-                    color: Color(0xFFF9F8E6), // Color F9F8E6
+                    color: Color(0xFFF9F8E6),
                     elevation: 7,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     child: Container(
-                      width: 160, // Ancho fijo del contenedor (igual que Weekly Analysis)
-                      height: 150, // Altura fija del contenedor (igual que Weekly Analysis)
+                      width: 160,
+                      height: 150,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center, // Centra el contenido verticalmente
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             'Dispositivos',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.normal,
-                              fontFamily: 'montserrat_semi_bold', // Aplica Montserrat
+                              fontFamily: 'montserrat_semi_bold',
                             ),
-                            textAlign: TextAlign.left, // Alinea el texto al centro
                           ),
-                          SizedBox(height: 10), // Espacio entre el texto y la imagen
+                          SizedBox(height: 10),
                           Image.asset(
-                            'images/pulsera.png', // Ruta de la imagen
+                            'images/pulsera.png',
                             width: 90,
                             height: 90,
                           ),
@@ -316,8 +208,9 @@ void main() {
     home: HomeActivity(),
     routes: {
       '/home': (context) => HomeActivity(),
-      '/PatientsView': (context) => PatientsView(), // Asegúrate de que la ruta esté correcta
-
+      '/PatientsView': (context) => PatientsView(),
+      '/ActivityDeviceStats': (context) => ActivityDeviceStats(),
+      // Otras rutas
     },
   ));
 }
