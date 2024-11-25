@@ -3,6 +3,9 @@ import 'package:samid_multiplatform/constants/colors.dart';
 import 'package:samid_multiplatform/screens/PatientsView.dart';
 import 'package:samid_multiplatform/screens/ActivityDeviceStats.dart';
 import 'package:samid_multiplatform/screens/menu.dart'; // Importamos el menú desde el archivo 'menu.dart'
+import 'package:samid_multiplatform/screens/CheckNow.dart'; // Importamos el menú desde el archivo 'menu.dart'
+
+
 
 class HomeActivity extends StatefulWidget {
   @override
@@ -210,6 +213,7 @@ void main() {
       '/home': (context) => HomeActivity(),
       '/PatientsView': (context) => PatientsView(),
       '/ActivityDeviceStats': (context) => ActivityDeviceStats(),
+      '/CheckNow': (context) => CheckNow(),
       // Otras rutas
     },
   ));

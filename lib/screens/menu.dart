@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:samid_multiplatform/screens/PatientsView.dart';
 import 'package:samid_multiplatform/screens/ActivityDeviceStats.dart'; // Asegúrate de tener la ruta correcta
 import 'package:samid_multiplatform/constants/colors.dart';
+import 'package:samid_multiplatform/screens/CheckNow.dart';
+import 'package:samid_multiplatform/screens/ActivityHistory.dart';
+
+
 
 class CustomDrawer extends StatelessWidget {
   final Function(String) navigateTo;
@@ -75,12 +79,24 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.healing),
             title: Text('Checar ahora', style: TextStyle(fontFamily: 'Montserrat')),
-            onTap: () => navigateTo('/check_now'),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => CheckNow(), // Redirige a PatientsView
+                ),
+              );
+            },
           ),
           ListTile(
             leading: Icon(Icons.history),
             title: Text('Historial de salud y actividad', style: TextStyle(fontFamily: 'Montserrat')),
-            onTap: () => navigateTo('/history'),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => ActivityHistory(), // Redirige a PatientsView
+                ),
+              );
+            },
           ),
           ListTile(
             leading: Icon(Icons.devices),
