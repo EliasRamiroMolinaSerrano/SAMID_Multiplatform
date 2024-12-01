@@ -20,19 +20,18 @@ class PatientsView extends StatelessWidget {
           icon: Icon(Icons.menu),
           onPressed: () => _openDrawer(context), // Función para abrir el menú
         ),
-        title: Text('Pacientes'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             Text(
-              'Pacientes',
+              '',
               style: TextStyle(
                 fontFamily: 'Montserrat',
                 fontWeight: FontWeight.bold,
                 fontSize: 30,
-                color: Colors.blueAccent,
+                color: Color(0xFF38BAB7),
               ),
             ),
             SizedBox(height: 100),
@@ -72,7 +71,7 @@ class PatientsView extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 18,
-                            color: Colors.blueAccent,
+                            color: Color(0xFF38BAB7),
                           ),
                         ),
                         SizedBox(height: 5),
@@ -81,7 +80,7 @@ class PatientsView extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 18,
-                            color: Colors.blueAccent,
+                            color: Color(0xFF38BAB7),
                           ),
                         ),
                         SizedBox(height: 15),
@@ -94,6 +93,8 @@ class PatientsView extends StatelessWidget {
                               },
                               child: Text('Checar'),
                               style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xFF47C5C2), // Color personalizado para "Checar"
+                                foregroundColor: Colors.white, // Color del texto en blanco
                                 minimumSize: Size(110, 50),
                                 textStyle: TextStyle(fontSize: 15),
                               ),
@@ -105,6 +106,8 @@ class PatientsView extends StatelessWidget {
                               },
                               child: Text('Aparato'),
                               style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xFF47C5C2), // Color personalizado para "Aparato"
+                                foregroundColor: Colors.white, // Color del texto en blanco
                                 minimumSize: Size(110, 50),
                                 textStyle: TextStyle(fontSize: 14),
                               ),

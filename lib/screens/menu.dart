@@ -20,13 +20,13 @@ class CustomDrawer extends StatelessWidget {
         children: [
           DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: AppColors.verdoso,
             ),
             child: Row(
               children: [
                 CircleAvatar(
                   radius: 40,
-                  backgroundImage: AssetImage('assets/images/your_image.png'),
+                  backgroundImage: AssetImage('images/vegetta.png'),
                 ),
                 SizedBox(width: 10),
                 Column(

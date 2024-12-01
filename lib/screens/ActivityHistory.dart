@@ -1,85 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:samid_multiplatform/constants/colors.dart';
+import 'package:samid_multiplatform/screens/menu.dart'; // Importamos el CustomDrawer
 
-class ActivityHistory extends StatelessWidget {
+class ActivityHistory extends StatefulWidget {
+  @override
+  _ActivityHistoryState createState() => _ActivityHistoryState();
+}
+
+class _ActivityHistoryState extends State<ActivityHistory> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void _openDrawer() {
+    _scaffoldKey.currentState?.openDrawer();
+  }
+
+  void _navigateTo(String route) {
+    Navigator.of(context).pushNamed(route);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: CustomDrawer(navigateTo: _navigateTo), // Usamos el mismo CustomDrawer
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: Text('History Activity'),
         leading: IconButton(
           icon: Icon(Icons.menu),
-          onPressed: () {
-            Scaffold.of(context).openDrawer();
-          },
-        ),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'Menu',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
-              onTap: () {
-                Navigator.pushNamed(context, '/home');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.people),
-              title: Text('Patients View'),
-              onTap: () {
-                Navigator.pushNamed(context, '/patients');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.analytics),
-              title: Text('Weekly Analysis'),
-              onTap: () {
-                Navigator.pushNamed(context, '/weekly_analysis');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.check_circle),
-              title: Text('Check Now'),
-              onTap: () {
-                Navigator.pushNamed(context, '/check_now');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.history),
-              title: Text('History'),
-              onTap: () {
-                Navigator.pushNamed(context, '/history');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Device Status'),
-              onTap: () {
-                Navigator.pushNamed(context, '/device_status');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.logout),
-              title: Text('Logout'),
-              onTap: () {
-                // Implementar acción de logout
-              },
-            ),
-          ],
+          onPressed: _openDrawer,
         ),
       ),
       body: Padding(
@@ -129,32 +76,37 @@ class ActivityHistory extends StatelessWidget {
     required IconData icon,
     required VoidCallback onTap,
   }) {
-    final Color verdoso = Color(0xFFB2FF59); // Reemplaza con tu color de constants si ya está definido
-
     return GestureDetector(
       onTap: onTap,
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 10),
-        color: verdoso,
+        color: Color(0xFFE3F2FD), // Usamos el color definido en constants
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
         child: Container(
-          height: 100, // Altura de 100 px
-          child: ListTile(
-            leading: Icon(
-              icon,
-              size: 50,
-              color: Colors.black54,
-            ),
-            title: Text(
-              title,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
+          height: 100, // Altura del card
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center, // Alinea verticalmente al centro
+            children: [
+              Icon(
+                icon,
+                size: 50,
+                color: Colors.black54,
               ),
-            ),
+              SizedBox(width: 20), // Espacio entre el ícono y el texto
+              Expanded( // Permite que el texto ocupe todo el espacio restante
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
